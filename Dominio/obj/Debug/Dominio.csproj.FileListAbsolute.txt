@@ -1,0 +1,6 @@
+C:\Users\Gonzalo Marcati\source\repos\TPC_Marcati\Dominio\bin\Debug\Dominio.dll
+C:\Users\Gonzalo Marcati\source\repos\TPC_Marcati\Dominio\bin\Debug\Dominio.pdb
+C:\Users\Gonzalo Marcati\source\repos\TPC_Marcati\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+C:\Users\Gonzalo Marcati\source\repos\TPC_Marcati\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Gonzalo Marcati\source\repos\TPC_Marcati\Dominio\obj\Debug\Dominio.dll
+C:\Users\Gonzalo Marcati\source\repos\TPC_Marcati\Dominio\obj\Debug\Dominio.pdb
