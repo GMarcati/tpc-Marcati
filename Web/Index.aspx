@@ -18,10 +18,11 @@
                         
                         <img src="<% = item.ImagenURL %>" class="card-img-top" alt="ImagenArticulo">
                         <div class="card-body">
-                            <h5 class="card-title"><% = item.Nombre %> (<% = item.Codigo %>)</h5>
-<%--                            <p class="card-text"><% = item.Descripcion %></p>
-                            <p class="card-text"><% = item.Precio %></p>
-                            <a href="Carrito.aspx?idart=<% = item.ID.ToString() %>" class="btn btn-primary">Agregar al carrito</a>--%>
+                            <h6>Codigo:<% = item.Codigo %></h6>
+                            <h5 class="card-title"><% = item.Nombre %> </h5>
+                         <p class="card-text"><% = item.Descripcion %></p>
+                            <p class="card-text">$<% = item.Precio %></p>
+                            <a href="Carrito.aspx?idart=<% = item.ID.ToString() %>" class="btn btn-primary">Agregar al carrito</a>
                         </div>
                     </div>
                 </div>
