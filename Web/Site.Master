@@ -48,7 +48,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Gonzalo Marcati</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Rolling Kitchen</p>
             </footer>
         </div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
