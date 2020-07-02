@@ -23,9 +23,9 @@ namespace Negocio
 
             try
             {
-                conexion.ConnectionString = "data source= DESKTOP-GTFEEVH; initial catalog=CATALOGO_DB; integrated security=sspi";
+                conexion.ConnectionString = "data source= DESKTOP-GTFEEVH; initial catalog=MARCATI_DB; integrated security=sspi";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "Select ID, Nombre From Categoria";
+                comando.CommandText = "Select ID, Nombre From Categorias Where Estado = 1";
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -49,6 +49,67 @@ namespace Negocio
             finally
             {
                 conexion.Close();
+            }
+        }
+
+        public void Agregar(Categoria nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+
+            try
+            {
+                datos.SetearQuery("Insert Categorias VALUES (@Nombre, 1)");
+                datos.AgregarParametro("@Nombre", nuevo.Nombre);
+                datos.EjecturAccion();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+
+            }
+        }
+
+        public void Modificar(Categoria categoria)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetearQuery("UPDATE Categorias SET Nombre=@Nombre WHERE Id=@Id");
+                datos.AgregarParametro("@Nombre", categoria.Nombre);
+                datos.AgregarParametro("@ID", categoria.ID);
+                datos.EjecturAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public void Eliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetearQuery("UPDATE Categorias set Estado = 0 where ID=" + id);
+                datos.AgregarParametro("@ID", id);
+                datos.EjecturAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }

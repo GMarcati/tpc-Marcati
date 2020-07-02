@@ -8,11 +8,11 @@ namespace Dominio
 {
     public class Usuario : Persona
     {
-        public int ID_Usuario { get; set; }
-        public string Nombre_Usuario { get; set; }
-        public string Constraseña { get; set; }
+        public Int64 ID_Usuario { get; set; }
+        public string Nombre_Usuario { get; set; }       
+        public string Contraseña { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
-        public int Estado { get; set; }
+        public Boolean Estado { get; set; }
 
     }
 }

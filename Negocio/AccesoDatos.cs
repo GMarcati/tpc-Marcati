@@ -28,6 +28,13 @@ namespace Negocio
             Comando.CommandType = System.Data.CommandType.Text;
             Comando.CommandText = consulta;
         }
+
+        public void SetearSP(string sp)
+        {
+            Comando.CommandType = System.Data.CommandType.StoredProcedure;
+            Comando.CommandText = sp;
+
+        }
         public void AgregarParametro(string nombre, object valor)
         {
             Comando.Parameters.AddWithValue(nombre, valor);
