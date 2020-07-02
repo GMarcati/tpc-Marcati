@@ -19,10 +19,18 @@ namespace Web
             try
             {
                 Usuario usuario = (Usuario)Session["usersession"];
-                if (usuario.TipoUsuario.ID != 1) 
+                if (usuario == null)
                 {
-                    Response.Redirect("Index.aspx", false);
+                    Session["Error" + Session.SessionID] = "El usuario no tiene permisos para ingresar a la pagina.";
+                    Response.Redirect("Error.aspx", false);
+                } else if (usuario.TipoUsuario.ID != 1)
+                {
+                    Session["Error" + Session.SessionID] = "El usuario " + usuario.Nombre_Usuario + " no tiene permisos para ingresar a la pagina.";
+                    Response.Redirect("Error.aspx", false);
                 }
+
+
+
 
                 CategoriaNegocio negocioCat = new CategoriaNegocio();
                 listaCategoria = negocioCat.Listar();
@@ -38,7 +46,7 @@ namespace Web
                     //negocio.Eliminar(Int64.Parse(id));
                     negocio.Eliminar(Convert.ToInt64(id));
                     listaProducto = negocio.Listar();
-                    //Response.Redirect("Admin.aspx");
+                    Response.Redirect("Admin.aspx", false);
                 }
 
                 var idCat = Request.QueryString["idQuitarCat"];
@@ -49,7 +57,7 @@ namespace Web
                     ////negocio.Eliminar(Int64.Parse(id));
                     //negocio.Eliminar(Convert.ToInt64(id));
                     //listaProducto = negocio.Listar();
-                    ////Response.Redirect("Admin.aspx");
+                    Response.Redirect("Admin.aspx", false);
                 }
 
 

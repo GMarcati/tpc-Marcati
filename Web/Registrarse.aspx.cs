@@ -57,8 +57,43 @@ namespace Web
         {
 
             if (tbxUsuario.Text != "" && tbxEmail.Text != "" && tbxPassword.Text != "" && tbxConfirmarPassword.Text != "" && tbxNombre.Text != "" && tbxApellido.Text != "" && tbxDNI.Text != "" && tbxDomicilio.Text != "" && tbxPassword.Text == tbxConfirmarPassword.Text)
-                negocio.Agregar(usuario);
-            Response.Redirect("Login.aspx");
+            {
+                listaUsuario = negocio.Listar();
+                bool bandera2 = false;
+                bool bandera3 = false;
+                foreach (var item in listaUsuario)
+                {
+                    if (item.Nombre_Usuario == tbxUsuario.Text || item.Email == tbxEmail.Text)
+                    {
+                        bandera2 = true;
+
+                    }
+                    if (item.DNI.ToString() == tbxDNI.Text)
+                    {
+                        bandera3 = true;
+                    }
+                }
+
+                if (bandera2 || bandera3)
+                {
+                    Session["Error" + Session.SessionID] = "Nombre de usuario/Email/DNI ya registrado.";
+                    Response.Redirect("ErrorLogin.aspx", false);
+                }
+                else
+                {
+                    negocio.Agregar(usuario);
+                    Response.Redirect("Login.aspx", false);
+                }
+
+            }
+            else
+            {
+                Session["Error" + Session.SessionID] = "Campos incompletos o las contraseñas ingresadas no coinciden.";
+                Response.Redirect("ErrorLogin.aspx", false);
+
+            }
+                
+            
 
         }
         protected void btnCancelar_Click(object sender, EventArgs e)

@@ -106,7 +106,8 @@
 
 
         <div class="container body-content ">
-            <div class="jumbotron jumbotron-fluid">
+            <br />
+            <div class="jumbotron jumbotron-fluid rounded-pill text-center">
                 <div class="container">
                     <h1 class="display-4">Crear cuenta</h1>
                     <p class="lead">Ingresa tus datos para poder crear una cuenta y asi poder comprar las mejores pizzas de San Fernando!</p>
@@ -163,6 +164,7 @@
 
 
             <asp:Button ID="btnAceptar" runat="server" Text="Registrarse" OnClick="btnAceptar_Click" CssClass="btn btn-primary" />
+            <asp:Button ID="btnCancelar" runat="server" Text="Volver al login" OnClick="btnCancelar_Click" CssClass="btn btn-primary" />
 
             <hr />
             <footer>

@@ -11,25 +11,16 @@ namespace Web
 {
 
 
-    public partial class Index
+    public partial class ErrorLogin
     {
 
         /// <summary>
-        /// Control tbxBusqueda.
+        /// Control form1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbxBusqueda;
-
-        /// <summary>
-        /// Control btnAdmin.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdmin;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }

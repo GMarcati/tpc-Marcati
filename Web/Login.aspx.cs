@@ -14,7 +14,9 @@ namespace Web
         public Usuario usuario = new Usuario();
         public List<Usuario> listaUsuario = new List<Usuario>();
         UsuarioNegocio negocio = new UsuarioNegocio();
+        VentasNegocio negocioVenta = new VentasNegocio();
         public string nombre;
+        public Int64 idusuario;
         public bool bandera;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,6 +36,7 @@ namespace Web
                             Session.Add("usersession", usuario);
                             bandera = true;
                             nombre = usuario.Nombre_Usuario;
+                            idusuario = usuario.ID_Usuario;
 
                         }
 
@@ -59,12 +62,17 @@ namespace Web
             {
                 if (bandera)
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Bienvenido " + nombre + "');", true);
+                    Dominio.Carrito carrito = new Dominio.Carrito();
+                    DateTime fechaHoy = DateTime.Now;
+                    carrito.Fecha = fechaHoy;
+                    carrito.ID_Usuario = idusuario;
+                    negocioVenta.Agregar(carrito);
                     Response.Redirect("Index.aspx", false);
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Usuario o contraseña incorrectos.');", true);
+                    Session["Error" + Session.SessionID] = "Usuario o contraseña incorrectos.";
+                    Response.Redirect("ErrorLogin.aspx", false);
                 }
                 //if (tbxUsuario.Text != "" && tbxEmail.Text != "" && tbxPassword.Text != "" && tbxConfirmarPassword.Text != "" && tbxNombre.Text != "" && tbxApellido.Text != "" && tbxDNI.Text != "" && tbxDomicilio.Text != "") */
                 // negocio.Agregar(usuario);
@@ -93,11 +101,11 @@ namespace Web
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                Session["Error" + Session.SessionID] = "Usuario o contraseña incorrectos.";
-                Response.Redirect("Error.aspx");
+                Session["Error" + Session.SessionID] = ex;
+                //Session["Error" + Session.SessionID] = "Error inesperado en el login.";
+                Response.Redirect("ErrorLogin.aspx",false);
             }
 
 

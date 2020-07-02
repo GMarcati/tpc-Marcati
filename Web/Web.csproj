@@ -72,13 +72,14 @@
     <Content Include="AltaProducto.aspx" />
     <Content Include="Carrito.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="ErrorLogin.aspx" />
     <Content Include="Index.aspx" />
+    <Content Include="Index2.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="ModificarCategoria.aspx" />
     <Content Include="ModificarProducto.aspx" />
     <Content Include="Pago.aspx" />
     <Content Include="Registrarse.aspx" />
-    <Content Include="Registrarse2.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -117,12 +118,26 @@
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ErrorLogin.aspx.cs">
+      <DependentUpon>ErrorLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorLogin.aspx.designer.cs">
+      <DependentUpon>ErrorLogin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Index2.aspx.cs">
+      <DependentUpon>Index2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index2.aspx.designer.cs">
+      <DependentUpon>Index2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -159,13 +174,6 @@
     </Compile>
     <Compile Include="Registrarse.aspx.designer.cs">
       <DependentUpon>Registrarse.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Registrarse2.aspx.cs">
-      <DependentUpon>Registrarse2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Registrarse2.aspx.designer.cs">
-      <DependentUpon>Registrarse2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

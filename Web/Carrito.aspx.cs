@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Web
         public bool bandera;
         public Dominio.Carrito carrito = new Dominio.Carrito();
         public ItemCarrito CarritoItem = new ItemCarrito();
+        public VentasNegocio negocioVenta = new VentasNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -110,6 +112,36 @@ namespace Web
                     Response.Redirect("Carrito.aspx", false);
                 }
 
+                var idCarrito = Request.QueryString["idComprar"];
+                if(idCarrito != null)
+                {
+                    Usuario usuario = (Usuario)Session["usersession"];
+
+                    if (usuario == null)
+                    {
+                        Response.Redirect("Login.aspx", false);
+                    }
+                    else
+                    {
+
+                    }
+
+                    //foreach (var item in listaCarrito)
+                    //{
+                    //    foreach (var item2 in item.listaItem)
+                    //    {
+                    //        item2.
+
+                    //        negocioVenta.AgregarItem(item2);
+                    //    }
+
+                    //}
+
+
+
+
+                }
+
 
 
             }
@@ -121,6 +153,8 @@ namespace Web
             }
 
         }
+
+
 
     }
 }

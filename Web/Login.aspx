@@ -17,7 +17,8 @@
 
     <form id="form1" runat="server">
         <div class="container body-content">
-            <div class="jumbotron jumbotron-fluid text-center">
+            <br />
+            <div class="jumbotron jumbotron-fluid text-center rounded-pill">
                 <div class="container">
                     <h1 class="display-4">Iniciar sesión</h1>
                 </div>
@@ -35,9 +36,13 @@
             <asp:Button ID="btnAceptar" runat="server" Text="Iniciar Sesion" OnClick="btnAceptar_Click" CssClass="btn btn-primary" />
 
             <div>
+
                 <br />
                 <asp:Label Text="¿Eres nuevo?" runat="server" />
                 <asp:LinkButton ID="linkCrearCuenta" runat="server" href="Registrarse.aspx">Crear cuenta</asp:LinkButton>
+                <br />
+                <asp:Label Text="¿Olvidaste la contraseña?" runat="server" />
+                <asp:LinkButton ID="linkContraseña" runat="server" href="RecuperarContraseña.aspx">Recuperar contraseña</asp:LinkButton>
 
             </div>
             <hr />

@@ -9,7 +9,8 @@
         <hr class="my-4">
         <p>Vas a poder dar de alta/modificar/eliminar productos/categorias.</p>
     </div>
-
+    <hr />
+    <br />
     <div class="jumbotron jumbotron-fluid  text-center">
         <div class="container">
             <h1 class="display-4">Categorias</h1>
@@ -58,8 +59,7 @@
             <% } %>
         </tbody>
     </table>
-
-
+    <hr />
     <div class="jumbotron jumbotron-fluid  text-center">
         <div class="container">
             <h1 class="display-4">Productos</h1>

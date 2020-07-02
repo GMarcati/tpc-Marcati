@@ -8,12 +8,14 @@ namespace Dominio
 {
     public class Carrito
     {
-        public int ID { get; set; }
+        public Int64 ID { get; set; }
+
+        public Int64 ID_Usuario { get; set; }
 
         public List<ItemCarrito> listaItem { get; set; }
         public decimal Total { get; set; }
 
-
+        public DateTime Fecha { get; set; }
 
         public Carrito()
         {
@@ -28,7 +30,7 @@ namespace Dominio
             {
                 subtotal += item.PrecioItem();
             }
-
+            Total = subtotal;
             return subtotal;
         }
     }

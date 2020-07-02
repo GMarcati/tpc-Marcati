@@ -1,12 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Web.Index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron text-center">
-        <h1 class="display-4">Hola!</h1>
+    <div class="jumbotron text-center rounded-pill">
+        <h1 class="display-4">Hola <% = name %>!</h1>
         <p class="lead">Bienvenido a Rolling Kitchen, un emprendimiento familiar en el cual vendemos diferentes variedades de comidas.</p>
         <hr class="my-4">
         <p>Pizza party - Desayunos - Tortas temáticas - Pasteleria - Catering</p>
@@ -22,11 +23,15 @@
         </nav>
     </div>
 
-
+    <div class="text-center" style="height:50px;">
+        <asp:Button Text="Administrar productos" runat="server" ID="btnAdmin" OnClick="btnAdmin_Click" CssClass="btn btn-outline-danger " />
+        
+    </div>
+    <%--<a href="Admin.aspx" class="btn btn-outline-success">Administrar productos</a>--%>
 
     <div class="columns " style="margin-left: 10px; margin-right: 10px;">
 
-        <div class="card-deck">
+        <div class="card-deck ">
             <div class="row row-cols-1 row-cols-md-3">
                 <% foreach (var item in listaProducto)
                     { %>

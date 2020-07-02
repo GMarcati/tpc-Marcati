@@ -7,15 +7,15 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 
-
 namespace Web
 {
-    public partial class Index : System.Web.UI.Page
+    public partial class Index2 : System.Web.UI.Page
     {
         public List<Producto> listaProducto { get; set; }
         public string name;
         protected void Page_Load(object sender, EventArgs e)
         {
+
             try
             {
                 Usuario usuario = (Usuario)Session["usersession"];
@@ -36,15 +36,14 @@ namespace Web
                 else
                 {
                     name = "";
-                    btnAdmin.Visible = false;
                 }
 
-                
+
 
                 ProductoNegocio negocio = new ProductoNegocio();
                 listaProducto = negocio.Listar();
 
-                
+
 
                 Session[Session.SessionID + "listaProducto"] = listaProducto;
 
@@ -54,7 +53,6 @@ namespace Web
                 Session["Error" + Session.SessionID] = ex;
                 Response.Redirect("Error.aspx");
             }
-
 
         }
 
@@ -93,7 +91,5 @@ namespace Web
             Response.Redirect("Admin.aspx", false);
 
         }
-
-
     }
 }

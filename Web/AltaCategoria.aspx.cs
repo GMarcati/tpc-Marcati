@@ -17,6 +17,11 @@ namespace Web
         {
             try
             {
+                Usuario usuario = (Usuario)Session["usersession"];
+                if (usuario == null)
+                {
+                    Response.Redirect("Login.aspx", false);
+                }
 
                 if (tbxNombre.Text != "")
                 {
