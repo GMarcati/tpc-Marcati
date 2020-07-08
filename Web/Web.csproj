@@ -71,10 +71,10 @@
     <Content Include="AltaCategoria.aspx" />
     <Content Include="AltaProducto.aspx" />
     <Content Include="Carrito.aspx" />
+    <Content Include="CompraFinalizada.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="ErrorLogin.aspx" />
     <Content Include="Index.aspx" />
-    <Content Include="Index2.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="ModificarCategoria.aspx" />
     <Content Include="ModificarProducto.aspx" />
@@ -111,6 +111,13 @@
     <Compile Include="Carrito.aspx.designer.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CompraFinalizada.aspx.cs">
+      <DependentUpon>CompraFinalizada.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompraFinalizada.aspx.designer.cs">
+      <DependentUpon>CompraFinalizada.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -131,13 +138,6 @@
     </Compile>
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Index2.aspx.cs">
-      <DependentUpon>Index2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Index2.aspx.designer.cs">
-      <DependentUpon>Index2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

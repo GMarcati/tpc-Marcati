@@ -62,11 +62,12 @@ namespace Web
             {
                 if (bandera)
                 {
-                    Dominio.Carrito carrito = new Dominio.Carrito();
-                    DateTime fechaHoy = DateTime.Now;
-                    carrito.Fecha = fechaHoy;
-                    carrito.ID_Usuario = idusuario;
-                    negocioVenta.Agregar(carrito);
+                    //Dominio.Carrito carrito = new Dominio.Carrito();
+                    //DateTime fechaHoy = DateTime.Now;
+                    //carrito.Fecha = fechaHoy;
+                    //carrito.ID_Usuario = idusuario;
+                    //carrito.ID++;
+                    //negocioVenta.Agregar(carrito);
                     Response.Redirect("Index.aspx", false);
                 }
                 else

@@ -16,6 +16,7 @@ namespace Web
         public Dominio.Carrito carrito = new Dominio.Carrito();
         public ItemCarrito CarritoItem = new ItemCarrito();
         public VentasNegocio negocioVenta = new VentasNegocio();
+        public List<Venta> listaVenta { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -57,13 +58,13 @@ namespace Web
                     {
 
                         CarritoItem.Producto = producto;
-                        
+
                         CarritoItem.Cantidad++;
 
                         carrito.Total += CarritoItem.Producto.Precio;
                         carrito.listaItem.Add(CarritoItem);
                         Session[Session.SessionID + "listaCarrito"] = carrito.listaItem;
-                        
+
 
                     }
                     Response.Redirect("Carrito.aspx", false);
@@ -86,11 +87,11 @@ namespace Web
                     }
                     else
                     {
-                        
+
                     }
-                  
+
                     Session[Session.SessionID + "listaCarrito"] = carrito.listaItem;
-                    Response.Redirect("Carrito.aspx",false);
+                    Response.Redirect("Carrito.aspx", false);
 
                 }
 
@@ -113,7 +114,7 @@ namespace Web
                 }
 
                 var idCarrito = Request.QueryString["idComprar"];
-                if(idCarrito != null)
+                if (idCarrito != null)
                 {
                     Usuario usuario = (Usuario)Session["usersession"];
 
@@ -123,6 +124,56 @@ namespace Web
                     }
                     else
                     {
+
+                        carrito.listaItem = (List<ItemCarrito>)Session[Session.SessionID + "listaCarrito"];
+
+                        Producto_X_Venta productoXventa = new Producto_X_Venta();
+                        List<Venta> listaVenta = new List<Venta>();
+
+
+
+                        Venta venta = new Venta();
+                        DateTime fechaHoy = DateTime.Now;
+
+
+                        //decimal subtotal = 0;
+
+                        //foreach (var item in listaItem)
+                        //{
+                        //    subtotal += item.PrecioItem();
+                        //}
+                        //Total = subtotal;
+
+                        decimal total = carrito.SubTotal();
+                        venta.ID_Usuario = usuario.ID_Usuario;
+                        venta.PrecioTotal = total;
+                        venta.Fecha = fechaHoy;
+                        negocioVenta.Agregar(venta);
+
+                        VentasNegocio negocioVentas = new VentasNegocio();
+                        listaVenta = negocioVentas.Listar();
+
+                        foreach (var item in listaVenta)
+                        {
+
+                            foreach (var itemCarrito in carrito.listaItem)
+                            {
+                                productoXventa.ID_Venta = item.ID;
+                                productoXventa.ID_Producto = itemCarrito.Producto.ID;
+                                productoXventa.Cantidad = itemCarrito.Cantidad;
+                                productoXventa.Precio = itemCarrito.PrecioItem();
+
+                                negocioVenta.AgregarItem(productoXventa);
+                            }
+                        }
+
+
+
+
+
+
+
+                        Response.Redirect("CompraFinalizada.aspx", false);
 
                     }
 

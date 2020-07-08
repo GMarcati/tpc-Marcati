@@ -10,7 +10,48 @@ namespace Negocio
 {
     public class VentasNegocio
     {
-        public void Agregar(Dominio.Carrito nuevo)
+
+        public List<Venta> Listar()
+        {
+            List<Venta> listado = new List<Venta>();
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion.ConnectionString = "data source= DESKTOP-GTFEEVH; initial catalog=MARCATI_DB; integrated security=sspi";
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "Select ID,ID_Usuario,PrecioTotal,Fecha From Ventas Where Estado = 1";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                while (lector.Read())
+                {
+                    Venta aux = new Venta();
+                    aux.ID = lector.GetInt64(0);
+                    aux.ID_Usuario = lector.GetInt64(1);
+                    aux.PrecioTotal = lector.GetDecimal(2);
+                    aux.Fecha = lector.GetDateTime(3);
+
+
+                    listado.Add(aux);
+                }
+
+                return listado;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+        public void Agregar(Venta nuevo)
         {
             SqlConnection conexion = new SqlConnection();
             SqlCommand comando = new SqlCommand();
@@ -23,7 +64,8 @@ namespace Negocio
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.CommandText = "spAltaVenta";
                 comando.Parameters.AddWithValue("@ID_Usuario", nuevo.ID_Usuario);
-                comando.Parameters.AddWithValue("@PrecioTotal", nuevo.Total);
+                //comando.Parameters.AddWithValue("@PrecioTotal", nuevo.Total);
+                comando.Parameters.AddWithValue("@PrecioTotal", nuevo.PrecioTotal);
                 comando.Parameters.AddWithValue("@Fecha", nuevo.Fecha);
 
 
@@ -45,7 +87,7 @@ namespace Negocio
             }
         }
 
-        public void AgregarItem(ItemCarrito nuevo)
+        public void AgregarItem(Producto_X_Venta nuevo)
         {
             SqlConnection conexion = new SqlConnection();
             SqlCommand comando = new SqlCommand();
@@ -57,8 +99,8 @@ namespace Negocio
                 conexion.ConnectionString = "data source= DESKTOP-GTFEEVH; initial catalog=MARCATI_DB; integrated security=sspi";
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.CommandText = "spAltaProducto_X_Venta";
-                comando.Parameters.AddWithValue("@ID_Producto", nuevo.Producto.ID);
-                comando.Parameters.AddWithValue("@ID_Venta", nuevo.ID);
+                comando.Parameters.AddWithValue("@ID_Producto", nuevo.ID_Producto);
+                comando.Parameters.AddWithValue("@ID_Venta", nuevo.ID_Venta);
                 comando.Parameters.AddWithValue("@Cantidad", nuevo.Cantidad);
                 comando.Parameters.AddWithValue("@Precio", nuevo.Precio);
 

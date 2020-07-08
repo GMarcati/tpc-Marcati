@@ -8,8 +8,8 @@ namespace Dominio
 {
     public class Venta
     {
-            public int ID { get; set; }
-            public Usuario ID_Usuario { get; set; }
+            public Int64 ID { get; set; }
+            public Int64 ID_Usuario { get; set; }
             
             public decimal PrecioTotal { get; set; }
             

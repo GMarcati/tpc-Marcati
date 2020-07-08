@@ -64,6 +64,9 @@
             <a href="Carrito.aspx?idComprar=<% = carrito.ID%>" class="btn btn-outline-success">Realizar pedido</a>
         </div>
 
+        
+
+
     </footer>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
