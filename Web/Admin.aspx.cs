@@ -67,6 +67,15 @@ namespace Web
                     Response.Redirect("Admin.aspx", false);
                 }
 
+                var idQuitarV = Request.QueryString["idQuitarVenta"];
+                if (idQuitarV != null)
+                {
+                    negocioVentas.Eliminar(Int32.Parse(idQuitarV));
+                    listaVenta = negocioVentas.Listar();
+                    Response.Redirect("Admin.aspx", false);
+
+                }
+
 
             }
             catch (Exception ex)

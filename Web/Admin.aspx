@@ -41,17 +41,12 @@
 
                 <th scope="row" class="text-right"><% = item.ID %></th>
                 <td><% = item.usuario.Nombre_Usuario %>   </td>
-                <td><% = item.PrecioTotal %>   </td>
+                <td>$<% = item.PrecioTotal %>   </td>
                 <td><% = item.Fecha %>   </td>
                 <td class="text-center">
 
-<%--                    <a href="ModificarCategoria.aspx?idcat=<% = item.ID.ToString() %>">
-                        <img src="modificar.ico" alt="Logo" style="width: 40px;">
-                    </a>
-                    <a href="Admin.aspx?idQuitarCat=<% = item.ID.ToString() %>">
-                        <img src="eliminar.ico" alt="Logo" style="width: 40px;">
-                    </a>--%>
-                <a href="VerProductos.aspx?idVenta=<% = item.ID %>" class="btn btn-primary mb-2 btn btn-dark">Ver Productos</a>
+                <a href="VerProductos.aspx?idVenta=<% = item.ID %>" class="btn btn-outline-info">Ver Productos</a>
+                <a href="Admin.aspx?idQuitarVenta=<% = item.ID.ToString() %>" class="btn btn-outline-success">Entregado</a>
             
                 </td>
 

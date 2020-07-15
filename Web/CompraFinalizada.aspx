@@ -18,6 +18,7 @@
             <div class="jumbotron jumbotron-fluid text-center rounded-pill">
                 <div class="container">
                     <h1 class="display-4">Compra realizada con exito!</h1>
+                    <p>Mande un whatapps al siguiente numero para coordinar la entrega y el metodo de pago 1577648593</p>
                     <a href="Index.aspx" class="btn btn-primary">Volver al inicio</a>
                 </div>
             </div>

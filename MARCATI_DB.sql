@@ -153,27 +153,34 @@ END
 go
 --Se crea vista para tener un registro de los productos eliminados
 Create view VW_ProductosEliminados AS
-Select P.Codigo, P.Nombre, P.Precio, C.Nombre AS Categoria from Productos AS P
-Inner Join Categorias AS C ON P.IdCategoria = C.ID
-Where P.Estado = 0
+Select P.ID, P.Codigo, P.Nombre, P.Descripcion, P.ImagenURL, P.Precio, P.Stock, C.ID AS idCategoria, C.Nombre AS Categoria , P.Estado AS EstadoProducto From Productos AS P Left Join Categorias AS C ON P.IdCategoria = C.ID Where P.Estado = 0 
 go
---Se create SP para dar de alta una venta
+--Se crea SP para dar de alta una venta
 Create Procedure spAltaVenta
 @ID_Usuario bigint,
 @PrecioTotal decimal,
 @Fecha datetime
 AS Insert into Ventas VALUES (@ID_Usuario,@PrecioTotal,GETDATE(),1)
 go
---Se create SP para ingresar datos en la tapa Producto__X_Venta
+--Se crea SP para ingresar datos en la tapa Producto__X_Venta
 Create Procedure spAltaProducto_X_Venta
 @ID_Producto bigint,
 @ID_Venta bigint,
 @Cantidad bigint,
 @Precio decimal
 AS Insert into Producto_X_Venta VALUES (@ID_Producto,@ID_Venta,@Cantidad,@Precio)
+go
+--Se crea SP para modificar stock de producto
+Create Procedure spModificarStockProducto
+@Stock bigint,
+@ID bigint
+AS 
+BEGIN
+UPDATE Productos SET Stock=@Stock WHERE ID=@ID
+END
+
 
 --Select ID,ID_Usuario,PrecioTotal,Fecha From Ventas Where Estado = 1
-
 
 --Ver productoXventa
 --select * from Producto_X_Venta
@@ -185,11 +192,18 @@ AS Insert into Producto_X_Venta VALUES (@ID_Producto,@ID_Venta,@Cantidad,@Precio
 --Comparar contraseña encriptada vs contraseñareal
 --select Contraseña AS ContraseñaEncriptada,CONVERT(VARCHAR(MAX), DECRYPTBYPASSPHRASE('password', Contraseña)) AS ContraseñaReal from Usuarios
 
---Registro de ventas
-Select U.NombreUsuario, U.Domicilio, P.Nombre, PXV.ID_Venta AS ID_Venta, PXV.ID_Producto AS ID_Producto, V.Fecha, PXV.Cantidad, PXV.Precio AS Precio_X_Cantidad, P.Precio AS PrecioProducto from Ventas AS V
+--Registro de ventas (PRUEBA)
+Select PXV.ID_Venta AS ID_Venta, PXV.ID_Producto AS ID_Producto, U.NombreUsuario, U.Domicilio, P.Nombre AS Nombre_Producto, PXV.Cantidad, PXV.Precio AS PrecioVenta, P.Precio AS PrecioProducto, P.Precio*PXV.Cantidad AS Precio_X_Cantidad, V.Fecha, V.Estado from Ventas AS V
 Inner Join Producto_X_Venta AS PXV ON V.ID = PXV.ID_Venta
 Inner Join Productos AS P ON PXV.ID_Producto = P.ID
 Inner Join Usuarios AS U ON V.ID_Usuario = U.IdUsuario
+Where V.Estado = 1
+Order by Fecha asc
+
+
+Select COUNT(*) AS CantidadVentas from Ventas AS V
+Inner Join Usuarios AS U ON V.ID_Usuario = U.IdUsuario
+Where V.Estado = 1
 
 Select * from Ventas
 
@@ -197,6 +211,15 @@ Select * from Producto_X_Venta
 
 Select * from Productos
 
+select * from VW_ProductosEliminados
+
+
+Select V.ID,V.ID_Usuario as idUsuario, U.NombreUsuario as Usuario, U.Domicilio,  V.PrecioTotal,V.Fecha From Ventas AS V Left Join Usuarios AS U ON V.ID_Usuario = U.IdUsuario Where V.Estado = 1
+
+Select PXV.ID_Venta as idVenta, P.Nombre as Producto ,PXV.ID_Producto as idProducto, PXV.Cantidad From Producto_X_Venta AS PXV Inner Join Productos AS P ON P.ID = PXV.ID_Producto
+
+Select PXV.ID_Venta as idVenta,PXV.ID_Producto as idProducto, PXV.Cantidad, U.NombreUsuario as Usuario From Producto_X_Venta AS PXV Left Join Productos AS P ON P.ID = PXV.ID_Producto Where V.Estado = 1
 
 
 
+Select V.ID,V.ID_Usuario as idUsuario,V.PrecioTotal,V.Fecha From Ventas AS V Inner Join Usuario Where Estado = 1

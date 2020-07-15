@@ -13,6 +13,7 @@ namespace Web
     {
 
         public List<Producto_X_Venta> listaProducto_X_Venta { get; set; }
+        public VentasNegocio negocioVenta = new VentasNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -20,8 +21,7 @@ namespace Web
             var idVen = Request.QueryString["idVenta"];
             if (idVen != null)
             {
-
-
+                listaProducto_X_Venta = negocioVenta.ListarProductoVenta();
 
             }
 

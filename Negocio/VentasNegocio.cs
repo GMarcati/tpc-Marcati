@@ -107,8 +107,8 @@ namespace Negocio
                 conexion.ConnectionString = "data source= DESKTOP-GTFEEVH; initial catalog=MARCATI_DB; integrated security=sspi";
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.CommandText = "spAltaProducto_X_Venta";
-                comando.Parameters.AddWithValue("@ID_Producto", nuevo.ID_Producto);
-                comando.Parameters.AddWithValue("@ID_Venta", nuevo.ID_Venta);
+                comando.Parameters.AddWithValue("@ID_Producto", nuevo.producto.ID);
+                comando.Parameters.AddWithValue("@ID_Venta", nuevo.venta.ID);
                 comando.Parameters.AddWithValue("@Cantidad", nuevo.Cantidad);
                 comando.Parameters.AddWithValue("@Precio", nuevo.Precio);
 
@@ -176,6 +176,76 @@ namespace Negocio
             finally
             {
                 conexion.Close();
+            }
+        }
+
+        public List<Producto_X_Venta> ListarProductoVenta()
+        {
+            List<Producto_X_Venta> listado = new List<Producto_X_Venta>();
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion.ConnectionString = "data source= DESKTOP-GTFEEVH; initial catalog=MARCATI_DB; integrated security=sspi";
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "Select PXV.ID_Venta as idVenta,PXV.ID_Producto as idProducto, P.Nombre as Producto, PXV.Cantidad From Producto_X_Venta AS PXV Inner Join Productos AS P ON P.ID = PXV.ID_Producto";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                while (lector.Read())
+                {
+
+
+                    Producto_X_Venta aux = new Producto_X_Venta();
+                    if (!Convert.IsDBNull(lector["idVenta"]))
+                    {
+                        aux.venta = new Venta();
+                        aux.venta.ID= (Int64)lector["idVenta"];
+
+                    }
+
+                    if (!Convert.IsDBNull(lector["idProducto"]))
+                    {
+                        aux.producto = new Producto();
+                        aux.producto.ID = (Int64)lector["idProducto"];
+                        aux.producto.Nombre = (string)lector["Producto"];
+                    }
+
+                    aux.Cantidad = lector.GetInt64(3);
+
+                    listado.Add(aux);
+                }
+
+                return listado;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+        public void Eliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetearQuery("UPDATE Ventas set Estado = 0 where ID=" + id);
+                datos.AgregarParametro("@ID", id);
+                datos.EjecturAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
 

@@ -169,14 +169,15 @@ namespace Web
                             if (item.usuario.ID_Usuario == usuario.ID_Usuario)
                             {
                                 idVenta = item.ID;
-
+                                
                             }
                         }
-
+                        venta.ID = idVenta;
                         foreach (var itemCarrito in carrito.listaItem)
                         {
-                            productoXventa.ID_Venta = idVenta;
-                            productoXventa.ID_Producto = itemCarrito.Producto.ID;
+                            
+                            productoXventa.venta = venta;
+                            productoXventa.producto = itemCarrito.Producto;
                             productoXventa.Cantidad = itemCarrito.Cantidad;
                             //productoXventa.Precio = itemCarrito.PrecioItem();
                             productoXventa.Precio = itemCarrito.Producto.Precio;

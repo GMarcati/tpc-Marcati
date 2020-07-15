@@ -24,25 +24,38 @@ namespace Web
 
             try
             {
-                bandera = false;
+                Usuario usuarioSession = (Usuario)Session["usersession"];
 
-                if (tbxUsuario.Text != null && tbxPassword.Text != null)
+                if (usuarioSession == null)
                 {
-                    foreach (var usuario in listaUsuario)
+
+                    bandera = false;
+
+                    if (tbxUsuario.Text != null && tbxPassword.Text != null)
                     {
-                        if (tbxUsuario.Text == usuario.Nombre_Usuario && tbxPassword.Text == usuario.Contraseña)
+                        foreach (var usuario in listaUsuario)
                         {
-                            //Response.Redirect("Index.aspx", false);
-                            Session.Add("usersession", usuario);
-                            bandera = true;
-                            nombre = usuario.Nombre_Usuario;
-                            idusuario = usuario.ID_Usuario;
+                            if (tbxUsuario.Text == usuario.Nombre_Usuario && tbxPassword.Text == usuario.Contraseña)
+                            {
+                                //Response.Redirect("Index.aspx", false);
+                                Session.Add("usersession", usuario);
+                                bandera = true;
+                                nombre = usuario.Nombre_Usuario;
+                                idusuario = usuario.ID_Usuario;
+
+                            }
 
                         }
 
                     }
-
                 }
+                else
+                {
+                    Session["Error" + Session.SessionID] = "Ya estas logueado.";
+                    Response.Redirect("Error.aspx", false);
+                }
+
+
 
 
             }
