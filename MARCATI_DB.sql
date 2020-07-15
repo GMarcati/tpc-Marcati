@@ -172,7 +172,7 @@ Create Procedure spAltaProducto_X_Venta
 @Precio decimal
 AS Insert into Producto_X_Venta VALUES (@ID_Producto,@ID_Venta,@Cantidad,@Precio)
 
-Select ID,ID_Usuario,PrecioTotal,Fecha From Ventas Where Estado = 1
+--Select ID,ID_Usuario,PrecioTotal,Fecha From Ventas Where Estado = 1
 
 
 --Ver productoXventa
@@ -186,9 +186,17 @@ Select ID,ID_Usuario,PrecioTotal,Fecha From Ventas Where Estado = 1
 --select Contraseña AS ContraseñaEncriptada,CONVERT(VARCHAR(MAX), DECRYPTBYPASSPHRASE('password', Contraseña)) AS ContraseñaReal from Usuarios
 
 --Registro de ventas
---Select U.NombreUsuario, P.Nombre, V.ID, V.Fecha, PXV.Cantidad, PXV.Precio AS Precio_X_Cantidad, P.Precio AS PrecioProducto from Ventas AS V
---Inner Join Producto_X_Venta AS PXV ON V.ID = PXV.ID_Venta
---Inner Join Productos AS P ON PXV.ID_Producto = P.ID
---Inner Join Usuarios AS U ON V.ID_Usuario = U.IdUsuario
+Select U.NombreUsuario, U.Domicilio, P.Nombre, PXV.ID_Venta AS ID_Venta, PXV.ID_Producto AS ID_Producto, V.Fecha, PXV.Cantidad, PXV.Precio AS Precio_X_Cantidad, P.Precio AS PrecioProducto from Ventas AS V
+Inner Join Producto_X_Venta AS PXV ON V.ID = PXV.ID_Venta
+Inner Join Productos AS P ON PXV.ID_Producto = P.ID
+Inner Join Usuarios AS U ON V.ID_Usuario = U.IdUsuario
+
+Select * from Ventas
+
+Select * from Producto_X_Venta
+
+Select * from Productos
+
+
 
 

@@ -8,12 +8,13 @@ namespace Dominio
 {
     public class Venta
     {
-            public Int64 ID { get; set; }
-            public Int64 ID_Usuario { get; set; }
-            
-            public decimal PrecioTotal { get; set; }
-            
-            public DateTime Fecha { get; set; }
-            
+        public Int64 ID { get; set; }
+
+        public Usuario usuario { get; set; }
+        public decimal PrecioTotal { get; set; }
+
+        public DateTime Fecha { get; set; }
+
+
     }
 }

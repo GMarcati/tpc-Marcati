@@ -34,7 +34,7 @@
                 <asp:TextBox type="password" class="form-control" ID="tbxPassword" runat="server" Style="width: 500px" />
             </div>
             <asp:Button ID="btnAceptar" runat="server" Text="Iniciar Sesion" OnClick="btnAceptar_Click" CssClass="btn btn-primary" />
-
+            <a href="Index.aspx" class="btn btn-primary">Volver al inicio</a>
             <div>
 
                 <br />

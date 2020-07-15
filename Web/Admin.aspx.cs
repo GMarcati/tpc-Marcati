@@ -13,6 +13,9 @@ namespace Web
     {
         public List<Producto> listaProducto { get; set; }
         public List<Categoria> listaCategoria { get; set; }
+        public List<Venta> listaVenta { get; set; }
+
+        public List<Producto> listaProductosEliminados { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,6 +39,10 @@ namespace Web
                 listaCategoria = negocioCat.Listar();
                 ProductoNegocio negocio = new ProductoNegocio();
                 listaProducto = negocio.Listar();
+                VentasNegocio negocioVentas = new VentasNegocio();
+                listaVenta = negocioVentas.Listar();
+
+                listaProductosEliminados = negocio.ListarEliminados();
 
                 //Session[Session.SessionID + "listaProducto"] = listaProducto;
 

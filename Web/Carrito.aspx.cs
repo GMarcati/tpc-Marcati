@@ -17,6 +17,7 @@ namespace Web
         public ItemCarrito CarritoItem = new ItemCarrito();
         public VentasNegocio negocioVenta = new VentasNegocio();
         public List<Venta> listaVenta { get; set; }
+        ProductoNegocio negocioProducto = new ProductoNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -118,18 +119,25 @@ namespace Web
                 {
                     Usuario usuario = (Usuario)Session["usersession"];
 
-                    if (usuario == null)
+
+                    if ((List<ItemCarrito>)Session[Session.SessionID + "listaCarrito"] == null)
+                    {
+                        Session["Error" + Session.SessionID] = "Error al realizar la compra.";
+                        Response.Redirect("Error.aspx", false);
+                    }
+                    else if (usuario == null)
                     {
                         Response.Redirect("Login.aspx", false);
                     }
                     else
                     {
 
+
                         carrito.listaItem = (List<ItemCarrito>)Session[Session.SessionID + "listaCarrito"];
 
                         Producto_X_Venta productoXventa = new Producto_X_Venta();
                         List<Venta> listaVenta = new List<Venta>();
-
+                        Producto producto = new Producto();
 
 
                         Venta venta = new Venta();
@@ -145,7 +153,7 @@ namespace Web
                         //Total = subtotal;
 
                         decimal total = carrito.SubTotal();
-                        venta.ID_Usuario = usuario.ID_Usuario;
+                        venta.usuario = usuario;
                         venta.PrecioTotal = total;
                         venta.Fecha = fechaHoy;
                         negocioVenta.Agregar(venta);
@@ -153,18 +161,31 @@ namespace Web
                         VentasNegocio negocioVentas = new VentasNegocio();
                         listaVenta = negocioVentas.Listar();
 
+                        Int64 idVenta=0;
+
                         foreach (var item in listaVenta)
                         {
 
-                            foreach (var itemCarrito in carrito.listaItem)
+                            if (item.usuario.ID_Usuario == usuario.ID_Usuario)
                             {
-                                productoXventa.ID_Venta = item.ID;
-                                productoXventa.ID_Producto = itemCarrito.Producto.ID;
-                                productoXventa.Cantidad = itemCarrito.Cantidad;
-                                productoXventa.Precio = itemCarrito.PrecioItem();
+                                idVenta = item.ID;
 
-                                negocioVenta.AgregarItem(productoXventa);
                             }
+                        }
+
+                        foreach (var itemCarrito in carrito.listaItem)
+                        {
+                            productoXventa.ID_Venta = idVenta;
+                            productoXventa.ID_Producto = itemCarrito.Producto.ID;
+                            productoXventa.Cantidad = itemCarrito.Cantidad;
+                            //productoXventa.Precio = itemCarrito.PrecioItem();
+                            productoXventa.Precio = itemCarrito.Producto.Precio;
+
+                            producto.ID = itemCarrito.Producto.ID;
+                            producto.Stock = itemCarrito.Producto.Stock - itemCarrito.Cantidad;
+
+                            negocioProducto.ModificarStock(producto);
+                            negocioVenta.AgregarItem(productoXventa);
                         }
 
 
@@ -173,9 +194,19 @@ namespace Web
 
 
 
-                        Response.Redirect("CompraFinalizada.aspx", false);
 
+
+
+
+                        Response.Redirect("CompraFinalizada.aspx", false);
                     }
+
+                    //else
+                    //{
+                    //    Session["Error" + Session.SessionID] = "Error al realizar la compra.";
+                    //    Response.Redirect("Error.aspx", false);
+                    //}
+
 
                     //foreach (var item in listaCarrito)
                     //{
@@ -198,8 +229,8 @@ namespace Web
             }
             catch (Exception ex)
             {
-                //Session["Error" + Session.SessionID] = "Error en el carrito";
-                Session["Error" + Session.SessionID] = ex;
+                Session["Error" + Session.SessionID] = "Error en el carrito.";
+                //Session["Error" + Session.SessionID] = ex;
                 Response.Redirect("Error.aspx");
             }
 

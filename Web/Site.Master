@@ -37,7 +37,9 @@
                         <a class="navbar-brand" href="Login.aspx">
                             <img src="login3.png" alt="Logo" style="width: 40px;">
                         </a>
-
+                        <a class="navbar-brand" href="Logoff.aspx">
+                            <img src="logoff.ico" alt="Logo" style="width: 40px;">
+                        </a>
                     </li>
                 </ul>
 

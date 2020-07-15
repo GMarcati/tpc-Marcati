@@ -13,6 +13,64 @@
     <br />
     <div class="jumbotron jumbotron-fluid  text-center">
         <div class="container">
+            <h1 class="display-4">Ventas</h1>
+            <p class="lead">Vas a poder ver las ventas.</p>
+            <div class="container-md text-center" style="height: 3em;">
+                <%--<a href="AltaCategoria.aspx" class="btn btn-primary mb-2 btn btn-dark">Agregar categoria</a>--%>
+            </div>
+        </div>
+    </div>
+    <%--<h3 class="text-center">Categorias</h3>--%>
+
+    <br />
+    <table class="table table-bordered ">
+        <thead>
+            <tr>
+                <th scope="col" class="text-right">ID</th>
+                <th scope="col">ID Usuario</th>
+                <th scope="col">Precio Total</th>
+                <th scope="col">Fecha Venta</th>
+                <th scope="col" class="text-center">Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <% foreach (var item in listaVenta)
+                { %>
+            <tr>
+
+                <th scope="row" class="text-right"><% = item.ID %></th>
+                <td><% = item.usuario.Nombre_Usuario %>   </td>
+                <td><% = item.PrecioTotal %>   </td>
+                <td><% = item.Fecha %>   </td>
+                <td class="text-center">
+
+<%--                    <a href="ModificarCategoria.aspx?idcat=<% = item.ID.ToString() %>">
+                        <img src="modificar.ico" alt="Logo" style="width: 40px;">
+                    </a>
+                    <a href="Admin.aspx?idQuitarCat=<% = item.ID.ToString() %>">
+                        <img src="eliminar.ico" alt="Logo" style="width: 40px;">
+                    </a>--%>
+                <a href="VerProductos.aspx?idVenta=<% = item.ID %>" class="btn btn-primary mb-2 btn btn-dark">Ver Productos</a>
+            
+                </td>
+
+
+
+            </tr>
+
+
+            <% } %>
+        </tbody>
+    </table>
+    <hr />
+
+
+
+
+
+    <div class="jumbotron jumbotron-fluid  text-center">
+        <div class="container">
             <h1 class="display-4">Categorias</h1>
             <p class="lead">Vas a poder dar de alta/modificar/eliminar categorias.</p>
             <div class="container-md text-center" style="height: 3em;">
@@ -118,6 +176,49 @@
             </div>
         </div>
     </div>
+
+    <hr />
+     <div class="jumbotron jumbotron-fluid  text-center">
+        <div class="container">
+            <h1 class="display-4">Productos Eliminados</h1>
+            <p class="lead">Vas a poder ver los productos eliminados.</p>
+            <div class="container-md text-center" style="height: 3em;">
+                <%--<a href="AltaCategoria.aspx" class="btn btn-primary mb-2 btn btn-dark">Agregar categoria</a>--%>
+            </div>
+        </div>
+    </div>
+    <%--<h3 class="text-center">Categorias</h3>--%>
+
+    <br />
+    
+    <table class="table table-bordered ">
+        <thead>
+            <tr>
+                <th scope="col" class="text-right">ID</th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            <% foreach (var item in listaProductosEliminados)
+                { %>
+            <tr>
+
+                <th scope="row" class="text-right"><% = item.ID %></th>
+                <td><% = item.Codigo %>   </td>
+                <td><% = item.Nombre %>   </td>
+                <td><% = item.Precio %>   </td>
+
+            </tr>
+
+
+            <% } %>
+        </tbody>
+    </table>
+    <hr />
 
 
    

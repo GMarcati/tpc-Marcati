@@ -21,9 +21,10 @@ namespace Web
             try
             {
                 Usuario usuario = (Usuario)Session["usersession"];
-                if (usuario == null)
+                if (usuario == null || usuario.TipoUsuario.ID != 1)
                 {
-                    Response.Redirect("Login.aspx", false);
+                    Session["Error" + Session.SessionID] = "El usuario no tiene permisos para ingresar a la pagina.";
+                    Response.Redirect("Error.aspx", false);
                 }
 
                 if (!IsPostBack)

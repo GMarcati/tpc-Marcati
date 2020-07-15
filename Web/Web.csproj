@@ -76,10 +76,11 @@
     <Content Include="ErrorLogin.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Logoff.aspx" />
     <Content Include="ModificarCategoria.aspx" />
     <Content Include="ModificarProducto.aspx" />
-    <Content Include="Pago.aspx" />
     <Content Include="Registrarse.aspx" />
+    <Content Include="VerProductos.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +147,13 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Logoff.aspx.cs">
+      <DependentUpon>Logoff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logoff.aspx.designer.cs">
+      <DependentUpon>Logoff.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ModificarCategoria.aspx.cs">
       <DependentUpon>ModificarCategoria.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -159,13 +167,6 @@
     </Compile>
     <Compile Include="ModificarProducto.aspx.designer.cs">
       <DependentUpon>ModificarProducto.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pago.aspx.cs">
-      <DependentUpon>Pago.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pago.aspx.designer.cs">
-      <DependentUpon>Pago.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registrarse.aspx.cs">
@@ -181,6 +182,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="VerProductos.aspx.cs">
+      <DependentUpon>VerProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VerProductos.aspx.designer.cs">
+      <DependentUpon>VerProductos.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

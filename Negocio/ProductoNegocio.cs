@@ -137,5 +137,72 @@ namespace Negocio
             }
         }
 
+        public void ModificarStock(Producto producto)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetearSP("spModificarStockProducto");
+
+                datos.AgregarParametro("@Stock", producto.Stock);
+                datos.AgregarParametro("@ID", producto.ID);
+                datos.EjecturAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+
+        public List<Producto> ListarEliminados()
+        {
+            List<Producto> lista = new List<Producto>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetearQuery("select * from VW_ProductosEliminados");
+                datos.EjecutarLector();
+                while (datos.Lector.Read())
+                {
+                    Producto aux = new Producto();
+                    aux.ID = datos.Lector.GetInt64(0);
+                    aux.Codigo = datos.Lector.GetString(1);
+                    aux.Nombre = datos.Lector.GetString(2);
+                    aux.Descripcion = datos.Lector.GetString(3);
+                    aux.ImagenURL = datos.Lector.GetString(4);
+                    aux.Precio = datos.Lector.GetDecimal(5);
+                    aux.Stock = datos.Lector.GetInt64(6);
+                    if (!Convert.IsDBNull(datos.Lector["idCategoria"]))
+                    {
+                        aux.Categoria = new Categoria();
+                        aux.Categoria.ID = (int)datos.Lector["idCategoria"];
+                        aux.Categoria.Nombre = (string)datos.Lector["Categoria"];
+
+                    }
+
+
+
+                    lista.Add(aux);
+
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+
+        }
+
     }
 }

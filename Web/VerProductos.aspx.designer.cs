@@ -11,7 +11,7 @@ namespace Web
 {
 
 
-    public partial class Pago
+    public partial class VerProductos
     {
     }
 }
